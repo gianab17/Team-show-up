@@ -1,70 +1,38 @@
 .App {
-  position: absolute;
-  width: 1736px;
-  height: 1236px;
-  
-  background: linear-gradient(245.12deg, #D3A3A3 -0.57%, rgba(191, 0, 0, 0.83) 97.19%);
-  border-radius: 30px;
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
   }
-  .AppHeaderBar {
-    position: absolute;
-  width: 1440px;
-  height: 604px;
-  left: 0px;
-  top: 0px;
-  
-  background: linear-gradient(259.42deg, #FFC9A1 0%, rgba(221, 240, 245, 0) 101.52%);
-  border-radius: 30px 30px 0px 0px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-  .AppAavator {
-  position: absolute;
-  width: 767px;
-  height: 476px;
-  left: 935px;
-  top: 38px;
+  to {
+    transform: rotate(360deg);
   }
-  .AppHeaderFont {
-  position: absolute;
-  width: 846px;
-  height: 139px;
-  left: 89px;
-  top: 179px;
-  
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 64px;
-  line-height: 96px;
-  
-  color: #000000;
-  
-  }
-  .AppLogo {
-  position: absolute;
-  width: 66px;
-  height: 64px;
-  left: 89px;
-  top: 22px;
-  }
-  .AppIcon1 {
-  position: absolute;
-  width: 345px;
-  height: 275px;
-  left: 89px;
-  top: 697px;
-  }
-  .AppIcon2 {
-  position: absolute;
-  width: 344px;
-  height: 275px;
-  left: 548px;
-  top: 697px;
-  }
-  
-  .AppIcon3 {
-  position: absolute;
-  width: 344px;
-  height: 275px;
-  left: 1006px;
-  top: 697px;
-  }
+}
