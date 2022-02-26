@@ -1,6 +1,6 @@
 //Sample Algorithm
 
-function search(arr, x)
+function search(arr, x) // Replace these parameters with your user input field values
 {
     let i = 0;
     let count = arr.length;
@@ -14,25 +14,19 @@ function search(arr, x)
     }
 }
 
-let items = [ 2, 3, 5, 7, 11, 13, 17 ];
+// let items = []; // Insert carsData here as an array
 
-console.log(search(items, 1));
+// let i = 0;
+// items = Array
+//     .apply(null, Array(10000))
+//     .map(() => ++i );
+// let count = 10000;
 
-console.log(search(items, 7));
+// let start = new Date();
 
-console.log(search(items, 19));
+// for (i = 0; i < count; i++)
+//     search(items, 7777);
 
-let i = 0;
-items = Array
-    .apply(null, Array(10000))
-    .map(() => ++i );
-let count = 10000;
+// let milliseconds = (new Date()) - start;
 
-let start = new Date();
-
-for (i = 0; i < count; i++)
-    search(items, 7777);
-
-let milliseconds = (new Date()) - start;
-
-console.log(milliseconds);
+// console.log(milliseconds);
