@@ -10,5 +10,5 @@ function DisplayCars() {
         return cars.car_type == userInput_type && cars.car_model == userInput_model && cars.userInput_mileage == userInput_mileage && cars.car_seats == userInput_seats
     });
 
-    
+    /// Put Filtered Cars in a paragraph/list from filteredCars above.
 }

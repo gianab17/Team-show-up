@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SignUpInfo from "./SignUpInfo";
-import OtherInfo from "./DisplayInfo";
+import DisplayInfo from "./DisplayInfo";
 
 function Form() {
 
@@ -13,7 +13,7 @@ function Form() {
       return <SignUpInfo formData={formData} setFormData={setFormData} />;
     } else if (page === 1) {
     } else {
-      return <OtherInfo formData={formData} setFormData={setFormData} />;
+      return //Put in DisplayInfo here...;
     }
   };
 
@@ -41,7 +41,7 @@ function Form() {
           <button
             onClick={() => {
               if (page === FormTitles.length - 1) {
-                
+                DisplayCars()
                 alert("YOU DID IT!");
                 console.log(formData);
               } else {
