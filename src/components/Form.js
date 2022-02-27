@@ -5,6 +5,10 @@ function Form() {
 
   const [page, setPage] = useState(0);
 
+  const [formData, setFormData] = useState({
+    
+  });
+
   const FormTitles = ["Sign Up"];
 
   const PageDisplay = () => {
@@ -40,7 +44,7 @@ function Form() {
           <button
             onClick={() => {
               if (page === FormTitles.length - 1) {
-                DisplayCars()
+                // DisplayCars()
                 alert("YOU DID IT!");
                 console.log(formData);
               } else {
