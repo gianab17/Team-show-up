@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import SignUpInfo from "./SignUpInfo";
-import OtherInfo from "./OtherInfo";
+import OtherInfo from "./DisplayInfo";
 
 function Form() {
 
   const [page, setPage] = useState(0);
 
-  const FormTitles = ["Sign Up", "Other"];
+  const FormTitles = ["Sign Up", "Display"];
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -41,9 +41,6 @@ function Form() {
           <button
             onClick={() => {
               if (page === FormTitles.length - 1) {
-                // Get Info from User Input
-                // User Info to insert into algorithm
-                // Algorithm function here...
                 
                 alert("YOU DID IT!");
                 console.log(formData);
