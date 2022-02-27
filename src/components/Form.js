@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import SignUpInfo from "./SignUpInfo";
-import DisplayInfo from "./DisplayInfo";
 
 function Form() {
 
   const [page, setPage] = useState(0);
 
-  const FormTitles = ["Sign Up", "Display"];
+  const [formData, setFormData] = useState({
+    
+  });
+
+  const FormTitles = ["Sign Up"];
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -21,7 +24,7 @@ function Form() {
     <div className="form">
       <div className="progressbar">
         <div
-          style={{ width: page === 0 ? "33.3%" : page == 1 ? "66.6%" : "100%" }}
+          style={{ width: page === 0 ? "33.3%" : page === 1 ? "66.6%" : "100%" }}
         ></div>
       </div>
       <div className="form-container">
@@ -31,7 +34,7 @@ function Form() {
         <div className="body">{PageDisplay()}</div>
         <div className="footer">
           <button
-            disabled={page == 0}
+            disabled={page === 0}
             onClick={() => {
               setPage((currPage) => currPage - 1);
             }}
@@ -41,7 +44,7 @@ function Form() {
           <button
             onClick={() => {
               if (page === FormTitles.length - 1) {
-                DisplayCars()
+                // DisplayCars()
                 alert("YOU DID IT!");
                 console.log(formData);
               } else {
