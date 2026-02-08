@@ -1,0 +1,149 @@
+# Required packages:
+# !pip install alpaca-trade-api yfinance scikit-learn python-dotenv ta-lib flask requests scipy pyyaml pytz aiohttp
+
+import os
+import yfinance as yf
+import alpaca_trade_api as tradeapi
+import numpy as np
+import pandas as pd
+import pickle
+from collections import deque
+from datetime import datetime, timedelta
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import SGDClassifier
+import talib.abstract as ta
+import time
+import logging
+import uuid
+import json
+from logging.handlers import TimedRotatingFileHandler
+from flask import Flask, jsonify, render_template_string, request, redirect, url_for
+import threading
+import requests
+from scipy.stats import ks_2samp
+import itertools
+import yaml
+import pytz
+import asyncio
+import aiohttp
+from dotenv import load_dotenv
+from functools import wraps
+
+load_dotenv()
+
+# -------------------- Configuration Management --------------------
+
+CONFIG_FILE = 'config.yaml'
+
+default_config = {
+    'broker_type': 'alpaca',
+    'alpaca': {
+        'api_key': os.getenv('API_KEY'),
+        'api_secret': os.getenv('API_SECRET'),
+        'base_url': 'https://paper-api.alpaca.markets',
+    },
+    'symbol': 'AAPL',
+    'symbols': ['AAPL'],
+    'lookback_days': 730,
+    'walk_forward_train': 70,
+    'walk_forward_val': 30,
+    'feature_window': 5,
+    'queue_size': 5,
+    'loop_interval_sec': 3600,  # 1 hour
+    'risk_per_trade': 0.01,
+    'stop_loss_percent': 0.03,
+    'take_profit_percent': 0.06,
+    'max_drawdown': 0.15,
+    'max_trades_per_day': 5,
+    'log_level': 'INFO',
+    'alert_webhook': None,  # e.g. Slack webhook URL
+    'timezone': 'America/New_York',
+    'logging_format_json': False,
+    'users': {  # simple user auth for UI access
+        'admin': 'changeme'
+    }
+}
+
+def load_config():
+    if os.path.isfile(CONFIG_FILE):
+        with open(CONFIG_FILE, 'r') as f:
+            config = yaml.safe_load(f)
+            if config is None:
+                return default_config
+            merged = default_config.copy()
+            merged.update(config)
+            return merged
+    else:
+        return default_config
+
+config = load_config()
+
+# -------------------- Logging Setup --------------------
+
+if config.get('logging_format_json', False):
+    class JsonFormatter(logging.Formatter):
+        def format(self, record):
+            log_record = {
+                'timestamp': self.formatTime(record),
+                'level': record.levelname,
+                'message': record.getMessage(),
+                'module': record.module,
+                'funcName': record.funcName,
+                'lineNo': record.lineno
+            }
+            return json.dumps(log_record)
+
+    log_handler = TimedRotatingFileHandler('trading_bot.log', when='midnight', backupCount=30)
+    log_handler.setFormatter(JsonFormatter())
+    logger = logging.getLogger()
+    logger.setLevel(getattr(logging, config['log_level'].upper(), logging.INFO))
+    logger.addHandler(log_handler)
+else:
+    logging.basicConfig(
+        filename='trading_bot.log',
+        level=getattr(logging, config['log_level'].upper(), logging.INFO),
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+    logger = logging.getLogger()
+
+# -------------------- License Verification --------------------
+
+licenses = {
+    "LICENSEKEY123": "2024-10-01",
+    "ANOTHERKEY456": "2023-11-15",
+    "TRIALKEY789": "2024-01-10"
+}
+
+def verify_license():
+    key = input("Please enter your license key: ").strip()
+    today = datetime.today().date()
+
+    if key not in licenses:
+        logger.error(f"Invalid license key attempt: {key}")
+        print("Invalid license key. Access denied.")
+        exit(1)
+
+    activation_date = datetime.strptime(licenses[key], "%Y-%m-%d").date()
+    expiry_date = activation_date + timedelta(days=365)  # 1 year license validity
+
+    if today > expiry_date:
+        logger.warning(f"Expired license key used: {key}, expired on {expiry_date}")
+        print(f"License expired on {expiry_date}. Please renew your license.")
+        exit(1)
+
+    logger.info(f"License verified for key: {key}, expires on {expiry_date}")
+    print(f"License verified. License valid until {expiry_date}.")
+
+# -------------------- Main Entrypoint --------------------
+
+def main():
+    verify_license()
+    logger.info("Starting Cajda trading bot main application.")
+    # Your full Cajda bot logic starts here
+    # For example, initialize API clients, set up event loops, etc.
+    print("Running Cajda trading bot...")
+
+if __name__ == "__main__":
+    main()
+
+
