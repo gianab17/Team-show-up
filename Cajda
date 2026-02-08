@@ -21,7 +21,7 @@ from flask import Flask, jsonify, render_template_string, request, redirect, url
 import threading
 import requests
 from scipy.stats import ks_2samp
-import itertools
+import itertools;
 import yaml
 import pytz
 import asyncio
